@@ -12,6 +12,16 @@ class SubtestListElementView extends Backbone.View
     "click .do_copy"       : "doCopy"
     "click .cancel_copy"   : "cancelCopy"
 
+    "click .name" : "toggleSelected"
+
+  toggleSelected: ->
+    if @selected == true
+      @selected = false
+      @$el.removeClass "subtest-selected"
+    else
+      @selected = true
+      @$el.addClass "subtest-selected"
+
   toggleDeleteConfirm: -> @$el.find(".delete_confirm").fadeToggle(250); false
 
   delete: -> @trigger "subtest:delete", @model; false
@@ -46,14 +56,14 @@ class SubtestListElementView extends Backbone.View
     $select = @$el.find(".copy_select").html(optionList)
       
   doCopy: (e) ->
-    @model.copyTo(@$el.find(".copy_select :selected").attr('data-assessmentId'))
+    @trigger "subtest:copy", @$el.find(".copy_select :selected").attr('data-assessmentId'), @model.id
     @$el.find(".copy_menu").addClass("confirmation")
     
   cancelCopy: ->
     @$el.find(".copy_menu").addClass("confirmation")
 
   render: ->
-    subtestName   = @model.get("name")
+    subtestName   = "<span class='name'>#{@model.get("name")}</span>"
     prototype     = "<span class='small_grey'>#{@model.get("prototype")}</span>"
     iconDrag      = "<img src='images/icon_drag.png' title='Drag to reorder' class='icon sortable_handle'>"
     iconEdit      = "<img src='images/icon_edit.png' title='Edit' class='icon icon_edit'>"

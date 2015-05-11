@@ -1647,6 +1647,9 @@ table.basic_info td {
   padding-right: 10px;
   vertical-align: middle;
 }
+.subtest-selected {
+  background-color: #e6fae6;
+}
 .question_list_element {
   border-bottom: 1px solid #cccccc;
   background: white;
@@ -2217,7 +2220,7 @@ body[rtl] {
   font-weight: normal;
   background-color: white;
   text-align: left;
-  border: 1px solid #000000;
+  border: 1px solid black;
 }
 .KlassSubtestResultView {
   margin: 1em 0;
@@ -2725,7 +2728,7 @@ button.ui-button-icons-only {
   display: block;
   line-height: 1;
   font-size: 22px;
-  border: 2px solid #ffffff;
+  border: 2px solid white;
 }
 .ui-button-text-only .ui-button-text {
   padding: 8px;
