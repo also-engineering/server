@@ -48,6 +48,7 @@ class GridRunView extends Backbone.View
     $target = $(event.target)
     index = $target.attr('data-index')
     @itemAtTime = index
+    @$el.find(".grid_element").removeClass("element_minute")
     $target.addClass "element_minute"
     @updateMode null, "mark"
     
@@ -203,7 +204,7 @@ class GridRunView extends Backbone.View
       Utils.flash "yellow"
       Utils.midAlert t("please select the item the child is currently attempting")
       @minuteMessage = true
-      @mode = "minuteItem"
+      @updateMode null, "minuteItem"
 
 
   updateMode: (event, mode = null) =>

@@ -100,6 +100,8 @@
       "input_mode"      : "Input Mode"
       "was_autostopped" : "Was autostopped"
       "time_remaining"  : "Time remaining"
+      "item_at_seconds" : "Item at __seconds__ seconds"
+ 
     "message" :
       "touch_last_item"      : "Please touch last item read."
       "time_still_running"   : "Time still running."
