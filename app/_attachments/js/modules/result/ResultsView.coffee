@@ -148,7 +148,7 @@ class ResultsView extends Backbone.View
       results     : t("ResultsView.label.results")
       details     : t("ResultsView.label.details")
       page        : t("ResultsView.label.page")
-      perPage     : t("ResultsView.label.par_page")
+      perPage     : t("ResultsView.label.per_page")
       advanced    : t("ResultsView.label.advanced")
 
       noResults   : t("ResultsView.message.no_results")
