@@ -39,6 +39,9 @@ pairsGrid = ( subtest, isClass ) ->
   row = []
 
   variableName = subtest.data.variable_name
+
+  variableName = subtest.name.toLowerCase().replace(/\s/g, "_") if variableName is ""
+
   row.push cell( subtest, "#{variableName}_auto_stop",                  subtest.data.auto_stop)
   row.push cell( subtest, "#{variableName}_time_remain",                subtest.data.time_remain)
   row.push cell( subtest, "#{variableName}_attempted",                  subtest.data.attempted)
