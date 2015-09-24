@@ -77,31 +77,31 @@ The only real behavior worth mentioning here is
   #
   # Subtest loop
   #
-  datetimeCount = 0
-  linearOrder = [0..subtestData.length-1]
-  orderMap = if doc["order_map"]? then doc["order_map"] else if doc["orderMap"] then doc["orderMap"] else linearOrder
+  datetimeCount = 0;
+  linearOrder = subtestData.map (el, i) -> return i
+
+  orderMap = if doc["order_map"]?
+      doc["order_map"]
+    else if doc["orderMap"]?
+      doc["orderMap"]
+    else
+      linearOrder
 
   timestamps = []
 
+  orderedSubtests = orderMap.map (index) ->
+    tmp = subtestData[index]
+    subtestData[index] = null
+    return tmp
+
+  orderedSubtests = orderedSubtests.concat(subtestData);
+  subtests = []
+  for subtest in orderedSubtests
+    subtests.push(subtest) if subtest?
+
+  orderedSubtests = subtests
   # go through each subtest in this result
-  for rawIndex, linearIndex in linearOrder 
-
-    row = []
-
-    # use the order map for randomized subtests
-    subtestIndex = orderMap.indexOf(rawIndex)
-    subtest = subtestData[subtestIndex]
-
-    # skip subtests with no data in unfinished assessments
-    unless subtest?
-      log "[CSV-DEBUG] skipped empty subtest"
-      log doc
-      continue 
-
-    unless subtest.data?
-      log "[CSV-DEBUG] skipped subtest with null data"
-      log doc
-      continue 
+  for subtest in orderedSubtests
 
     prototype = subtest['prototype']
 
@@ -137,9 +137,14 @@ The only real behavior worth mentioning here is
     else if prototype == "gps"
       result = result.concat pairsGps subtest
 
-    result.push cell subtest, "timestamp_#{linearIndex}", subtest.timestamp
+    timestamps.push subtest.timestamp
 
-  keyId = 
+  timestamps.sort()
+  for timestamp, i in timestamps
+    result.push cell("timestamp_" + i, "timestamp_" + i, timestamp)
+
+
+  keyId =
     if isClassResult
       doc.klassId
     else
