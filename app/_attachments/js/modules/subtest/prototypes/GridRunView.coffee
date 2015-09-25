@@ -5,25 +5,24 @@ class GridRunView extends Backbone.View
   events: if Modernizr.touch then {
     'click .grid_element'     : 'gridClick' #click
     'click .end_of_grid_line' : 'endOfGridLineClick' #click
-    'click .grid_mode'   : 'updateMode'
     'click .start_time'  : 'startTimer'
     'click .stop_time'   : 'stopTimer'
     'click .restart'     : 'restartTimer'
   } else {
     'click .end_of_grid_line' : 'endOfGridLineClick'
     'click .grid_element'     : 'gridClick'
-    'click .grid_mode'        : 'updateMode'
     'click .start_time'       : 'startTimer'
     'click .stop_time'        : 'stopTimer'
     'click .restart'          : 'restartTimer'
   }
-  
+
   restartTimer: ->
     @stopTimer(simpleStop:true) if @timeRunning
 
     @resetVariables()
 
     @$el.find(".element_wrong").removeClass "element_wrong"
+    @$el.find(".grid_element").removeClass "element_minute"
 
   gridClick: (event) =>
     event.preventDefault()
@@ -36,7 +35,7 @@ class GridRunView extends Backbone.View
     indexIsntBelowLastAttempted = parseInt(index) > parseInt(@lastAttempted)
     lastAttemptedIsntZero       = parseInt(@lastAttempted) != 0
     correctionsDisabled         = @dataEntry is false and @parent?.parent?.enableCorrections is false
-    
+
     return if correctionsDisabled && lastAttemptedIsntZero && indexIsntBelowLastAttempted
 
     @markElement(index)
@@ -50,8 +49,8 @@ class GridRunView extends Backbone.View
     @itemAtTime = index
     @$el.find(".grid_element").removeClass("element_minute")
     $target.addClass "element_minute"
-    @updateMode null, "mark"
-    
+    @updateMode "mark"
+
 
   checkAutostop: ->
     if @timeRunning
@@ -126,7 +125,7 @@ class GridRunView extends Backbone.View
       @interval = setInterval( @updateCountdown, 1000 ) # magic number
       @startTime = @getTime()
       @timeRunning = true
-      @updateMode null, "mark"
+      @updateMode "mark"
       @enableGrid()
       @updateCountdown()
 
@@ -167,7 +166,7 @@ class GridRunView extends Backbone.View
 
   removeUndo: =>
     @undoable = false
-    @updateMode null, "disabled"
+    @updateMode "disabled"
     clearTimeout(@timeout)
 
   unAutostopTest: ->
@@ -177,7 +176,7 @@ class GridRunView extends Backbone.View
     @lastAttempted = 0
     @$el.find(".grid_element").slice(@autostop-1,@autostop).removeClass "element_last"
     @timeRunning = true
-    @updateMode null, "mark"
+    @updateMode "mark"
     Utils.topAlert t("GridRunView.message.autostop_cancel")
 
   updateCountdown: =>
@@ -197,28 +196,25 @@ class GridRunView extends Backbone.View
             Utils.background ""
         , 1e3) # magic number
 
-        @updateMode event, "last"
+        @updateMode "last"
 
 
     if @captureItemAtTime && !@gotIntermediate && !@minuteMessage && @timeElapsed >= @captureAfterSeconds
       Utils.flash "yellow"
       Utils.midAlert t("please select the item the child is currently attempting")
       @minuteMessage = true
-      @updateMode null, "minuteItem"
+      @updateMode "minuteItem"
 
 
-  updateMode: (event, mode = null) =>
+  updateMode: ( mode = null ) =>
     # dont' change the mode if the time has never been started
     if (mode==null && @timeElapsed == 0 && not @dataEntry) || mode == "disabled"
-      @$el.find(".grid_mode").removeAttr("checked")
-      @$el.find(".grid_mode_wrapper").buttonset("refresh")
-      return
-    if mode?
+      @modeButton.setValue null
+    else if mode? # manually change the mode
       @mode = mode
-      @$el.find("input.grid_mode[value=#{mode}]").attr("checked", "checked")
-      @$el.find(".grid_mode_wrapper").buttonset("refresh").click @updateMode
-      return
-    @mode = $(event.target).val() unless @autostopped
+      @modeButton.setValue @mode
+    else # handle a click event
+      @mode = @modeButton.getValue()
 
   getTime: ->
     Math.round((new Date()).getTime() / 1000)
@@ -255,35 +251,35 @@ class GridRunView extends Backbone.View
 
     @itemMap = []
     @mapItem = []
-    
+
     if @model.has("randomize") && @model.get("randomize")
-      for item, i in @items
-        @itemMap[i] = i
-      for item, i in @items
+      @itemMap = @items.map (value, i) -> i
+
+      @items.forEach (item, i) ->
         temp = Math.floor(Math.random() * @items.length)
         tempValue = @itemMap[temp]
         @itemMap[temp] = @itemMap[i]
         @itemMap[i] = tempValue
-
-      for item, i in @itemMap
+      , @
+      
+      @itemMap.forEach (item, i) ->
         @mapItem[@itemMap[i]] = i
+      , @
     else
-      for item, i in @items
+      @items.forEach (item, i) -> 
         @itemMap[i] = i
         @mapItem[i] = i
+      , @
 
     if !@captureLastAttempted && !@captureItemAtTime
       @mode = "mark"
     else
       @mode = "disabled"
 
-
     @mode = "mark" if @dataEntry
 
+    @gridOutput = @items.map -> 'correct'
 
-    @gridOutput = []
-    for item, i in @items
-      @gridOutput[i] = 'correct'
     @columns  = parseInt(@model.get("columns")) || 3
 
     @autostop = if @untimed then 0 else (parseInt(@model.get("autostop")) || 0)
@@ -300,7 +296,6 @@ class GridRunView extends Backbone.View
       if previous
 
         #     items = data.items
-        
         @captureLastAttempted     = previous.capture_last_attempted
         @itemAtTime               = previous.item_at_time
         @timeIntermediateCaptured = previous.time_intermediate_captured
@@ -309,15 +304,12 @@ class GridRunView extends Backbone.View
         @lastAttempted            = previous.attempted
         @timeRemaining            = previous.time_remain
         @markRecord               = previous.mark_record
-      
-#      for item, i in @markRecord
-#        @markElement(item)
-    
-    @updateMode( null, @mode )
+
+    @updateMode @mode if @modeButton?
 
   i18n: ->
-    
-    @text = 
+
+    @text =
       autostop           : t("GridRunView.message.autostop")
       touchLastItem      : t("GridRunView.message.touch_last_item")
       subtestNotComplete : t("GridRunView.message.subtest_not_complete")
@@ -365,8 +357,8 @@ class GridRunView extends Backbone.View
 
     @dataEntry = options.dataEntry
 
-    @model  = @options.model
-    @parent = @options.parent
+    @model  = options.model
+    @parent = options.parent
 
     @resetVariables()
 
@@ -436,31 +428,33 @@ class GridRunView extends Backbone.View
     # if any other option is avaialbe other than mark, then show the selector
     if @captureLastAttempted || @captureItemAtTime
 
-      minuteItemButton =  ""
-      if @captureItemAtTime
-        labelText = t('GridRunView.label.item_at_seconds', seconds: @captureAfterSeconds)
-        minuteItemButton = "
-          <label for='minute_item_#{@cid}'>#{labelText}</label>
-          <input class='grid_mode' name='grid_mode' id='minute_item_#{@cid}' type='radio' value='minuteItem'>
-        "
+      @modeButton?.close()
 
-      captureLastButton = ""
-      if @captureLastAttempted
-        captureLastButton = "
-          <label for='last_attempted_#{@cid}'>#{@text.lastAttempted}</label>
-          <input class='grid_mode' name='grid_mode' id='last_attempted_#{@cid}' type='radio' value='last'>
-        "
-      markButton = "
-        <label for='mark_#{@cid}'>#{@text.mark}</label>
-        <input class='grid_mode' name='grid_mode' id='mark_#{@cid}' type='radio' value='mark'>
-      "
+      buttonConfig =
+        options : []
+        mode    : "single"
 
+      buttonConfig.options.push {
+        label : @text.mark
+        value : "mark"
+      }
+
+      buttonConfig.options.push {
+        label : t( "item at __seconds__ seconds", seconds : @captureAfterSeconds )
+        value : "minuteItem"
+      } if @captureItemAtTime
+
+      buttonConfig.options.push {
+        label : @text.lastAttempted
+        value : "last"
+      } if @captureLastAttempted
+
+      @modeButton = new ButtonView buttonConfig
+      @modeButton.on "change click", (=> @updateMode()), @
       modeSelector = "
-        <div class='grid_mode_wrapper question buttonset clearfix'>
+        <div class='grid_mode_wrapper question clearfix'>
           <label>#{@text.inputMode}</label><br>
-          #{markButton}
-          #{minuteItemButton}
-          #{captureLastButton}
+          <div class='mode-button'></div>
         </div>
       "
 
@@ -485,6 +479,9 @@ class GridRunView extends Backbone.View
     "
 
     @$el.html html
+
+    @modeButton.setElement @$el.find ".mode-button"
+    @modeButton.render()
 
     @trigger "rendered"
     @trigger "ready"
@@ -511,14 +508,14 @@ class GridRunView extends Backbone.View
     @stopTimer() if @timeRunning
 
     if parseInt(@lastAttempted) is @items.length and @timeRemaining is 0
-      
+
       item = @items[@items.length-1]
       if confirm(t("GridRunView.message.last_item_confirm", item:item))
         @updateMode
         return true
       else
         @messages = if @messages?.push then @messages.concat([msg]) else [msg]
-        @updateMode null, "last"
+        @updateMode "last"
         return false
 
     return false if @captureLastAttempted && @lastAttempted == 0
@@ -540,7 +537,7 @@ class GridRunView extends Backbone.View
 
     if noLastItem && not timerHasntRun
       messages.push @text.touchLastItem
-      @updateMode null, "last"
+      @updateMode "last"
 
     if timeStillRunning
       messages.push @text.timeStillRunning
@@ -553,7 +550,7 @@ class GridRunView extends Backbone.View
     @lastAttempted = @items.length if not @captureLastAttempted
 
     for item, i in @items
-      
+
       if @mapItem[i] < @lastAttempted
         itemResults[i] =
           itemResult : @gridOutput[@mapItem[i]]

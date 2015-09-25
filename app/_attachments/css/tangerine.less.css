@@ -404,7 +404,7 @@ textarea[contenteditable] {
  */
 body {
   font-size: 20px;
-  background: #999999 url("../images/noise.png");
+  background: #999 url("../images/noise.png");
 }
 body.server {
   font-size: 100%;
@@ -420,7 +420,7 @@ section {
   margin-bottom: 10px;
 }
 body.flash {
-  background-color: #f7c942;
+  background-color: #F7C942;
 }
 .icon {
   cursor: pointer;
@@ -428,7 +428,7 @@ body.flash {
 }
 table.disabled .grid_element,
 div.disabled .grid_element {
-  color: #cccccc !important;
+  color: #CCC !important;
 }
 body.class table.grid .grid_element {
   font-family: Andika !important;
@@ -452,7 +452,7 @@ table.grid .grid_element {
   font-family: Gentium, Tahoma, Monaco, sans-serif;
   cursor: pointer;
   text-align: center;
-  background: #cccccc;
+  background: #CCC;
   color: black;
   margin: 5px;
   padding: 10px;
@@ -468,11 +468,11 @@ table.grid .end_of_grid_line {
   margin: 5px;
   padding: 5px 5px;
   cursor: pointer;
-  background: #f6c637 !important;
+  background: #F6C637 !important;
   color: white !important;
   font-weight: bold;
   font-size: 40px;
-  border: 5px solid #f6c637;
+  border: 5px solid #F6C637;
   text-align: center;
   border-radius: 10px;
   -moz-border-radius: 10px;
@@ -480,7 +480,7 @@ table.grid .end_of_grid_line {
 }
 div.grid .element_wrong,
 table.grid .element_wrong {
-  background: #6daed9;
+  background: #6DAED9;
   text-decoration: line-through;
 }
 div.grid .element_last,
@@ -521,13 +521,13 @@ button.time {
   font-size: 25px;
   margin: 0 15px 10px 6px;
   color: white;
-  background-color: #f49b00;
+  background-color: #F49B00;
   border: 0 !important;
   border-radius: 10px !important;
   font-weight: normal;
 }
 button.time:active {
-  background-color: #f6c637;
+  background-color: #F6C637;
 }
 div.timer {
   min-width: 60px;
@@ -537,7 +537,7 @@ div.timer {
   padding: 11px 0;
   margin: 0;
   font-size: 25px;
-  border: 2px #cccccc solid;
+  border: 2px #CCC solid;
   border-radius: 10px;
   color: black;
 }
@@ -572,7 +572,7 @@ progress {
 .sticky_alert {
   position: fixed;
   text-align: center;
-  background: #f6ef9a;
+  background: #F6EF9A;
   color: black;
   border-radius: 10px;
   -moz-border-radius: 10px;
@@ -595,7 +595,7 @@ progress {
 #modal {
   position: fixed;
   text-align: center;
-  background: #f6ef9a;
+  background: #F6EF9A;
   color: black;
   border-radius: 10px;
   -moz-border-radius: 10px;
@@ -625,13 +625,13 @@ progress {
   box-shadow: 0 0 10px rgba(100, 0, 0, 0.2);
 }
 .result_view .save_status {
-  color: #8cc63f;
+  color: #8CC63F;
   display: inline-block;
-  border-color: #8cc63f;
+  border-color: #8CC63F;
 }
 .result_view .not_saved {
-  border-color: #cccccc !important;
-  color: #cccccc;
+  border-color: #CCC !important;
+  color: #CCC;
   font-weight: bold;
 }
 #watermark {
@@ -647,7 +647,7 @@ progress {
   opacity: 0.5;
 }
 #footer {
-  background: #f6c637 url("../images/noise.png");
+  background: #F6C637 url("../images/noise.png");
   width: 100%;
   height: 77px;
   -moz-box-shadow: 0 15px 30px 5px rgba(0, 0, 0, 0.3);
@@ -669,7 +669,7 @@ progress {
   font-size: 20px;
   padding: 10px;
   display: inline-block;
-  border: 2px solid #cccccc;
+  border: 2px solid #CCC;
   margin: 0px 0 10px;
 }
 .info_box_wide {
@@ -677,7 +677,7 @@ progress {
   font-size: 20px;
   padding: 10px;
   display: inline-block;
-  border: 2px solid #cccccc;
+  border: 2px solid #CCC;
   margin: 0px 0 10px;
   width: 90%;
 }
@@ -689,7 +689,7 @@ progress {
   font-size: 20px;
   padding: 10px;
   display: inline-block;
-  border: 2px solid #eeeeee;
+  border: 2px solid #EEE;
   border-radius: 10px;
   margin: 10px 0;
 }
@@ -697,7 +697,7 @@ progress {
   font-size: 20px;
   padding: 10px;
   display: inline-block;
-  border: 2px solid #eeeeee;
+  border: 2px solid #EEE;
   border-radius: 10px;
   margin: 10px 0;
   width: 100%;
@@ -708,12 +708,12 @@ progress {
  * Also: hot pink! (or customize the background color to match your design)
  */
 ::-moz-selection {
-  background: #8cc63f;
+  background: #8CC63F;
   color: #fff;
   text-shadow: none;
 }
 ::selection {
-  background: #8cc63f;
+  background: #8CC63F;
   color: #fff;
   text-shadow: none;
 }
@@ -723,7 +723,7 @@ progress {
 #navigation {
   font-size: 18px;
   position: relative;
-  background: #f6c637 url("../images/noise.png");
+  background: #F6C637 url("../images/noise.png");
   display: none;
   -moz-box-shadow: 0 0 10px rgba(100, 0, 0, 0.2);
   -webkit-box-shadow: 0 0 10px rgba(100, 0, 0, 0.2);
@@ -756,10 +756,10 @@ progress {
   height: 30px;
   padding: 15px 10px 6px 10px;
   color: white;
-  background: #f49b00;
+  background: #F49B00;
 }
 #navigation #logout:hover {
-  background: #f6c637;
+  background: #F6C637;
 }
 #navigation #navigation-logo {
   padding: 3px;
@@ -773,20 +773,20 @@ progress {
 }
 #navigation #username-dropdown li {
   width: 100%;
-  border-top: 2px solid #f49b00;
-  background-color: #f6c637;
+  border-top: 2px solid #F49B00;
+  background-color: #F6C637;
   display: block;
 }
 #navigation #username-dropdown a:visited,
 #navigation #username-dropdown a {
   display: block;
   padding: 10px;
-  background-color: #f6c637;
+  background-color: #F6C637;
   text-decoration: none;
   color: white;
 }
 #navigation #username-dropdown a:hover {
-  background-color: #f49b00;
+  background-color: #F49B00;
 }
 .assessment_menu {
   display: none;
@@ -978,7 +978,7 @@ ul.assessment_list li.AssessmentListElementView {
   list-style: none;
   margin-top: 20px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #888888;
+  border-bottom: 1px solid #888;
   font-size: 20px;
 }
 ul.assessment_list li.AssessmentListElementView button.name,
@@ -1002,7 +1002,7 @@ ul.assessment_list li.AssessmentListElementView .non_admin span {
   vertical-align: middle;
 }
 ul.assessment_list .archived_assessment {
-  color: #888888;
+  color: #888;
 }
 ul.assessment_list .assessment_menu {
   margin-left: 55px;
@@ -1414,7 +1414,7 @@ ul.assessment_list .assessment_menu {
 }
 .resultCount {
   display: inline-block;
-  color: #888888;
+  color: #888;
   font-size: 20px;
 }
 .small_grey {
@@ -1422,7 +1422,7 @@ ul.assessment_list .assessment_menu {
   display: inline-block;
   vertical-align: middle;
   font-size: 12px;
-  color: #999999;
+  color: #999;
 }
 /*
  * AssessmentElementView
@@ -1452,7 +1452,7 @@ div.assessment_edit_view ul {
 }
 div.assessment_edit_view ul li {
   line-height: 40px;
-  border-bottom: 1px solid #888888;
+  border-bottom: 1px solid #888;
   padding: 5px 0;
   vertical-align: middle;
 }
@@ -1476,13 +1476,13 @@ li {
  * Placeholders
  */
 input::-webkit-input-placeholder {
-  color: #cccccc;
+  color: #CCC;
 }
 input:-moz-placeholder {
-  color: #cccccc;
+  color: #CCC;
 }
 input:-ms-input-placeholder {
-  color: #cccccc;
+  color: #CCC;
 }
 /*
  * Edit Subtest
@@ -1528,7 +1528,7 @@ table.basic_info {
   display: inline-block;
   vertical-align: middle;
   font-size: 12px;
-  color: #999999;
+  color: #999;
   display: block;
 }
 table.basic_info th {
@@ -1547,7 +1547,7 @@ table.basic_info td {
   background: white;
   margin: 0 0 40px;
   padding: 5px 10px 15px;
-  border: 2px solid #cccccc;
+  border: 2px solid #CCC;
 }
 .question {
   position: relative;
@@ -1557,7 +1557,7 @@ table.basic_info td {
   background: white;
   margin: 0 0 40px;
   padding: 5px 10px 15px;
-  border: 2px solid #cccccc;
+  border: 2px solid #CCC;
 }
 .question input {
   display: inline;
@@ -1572,7 +1572,7 @@ table.basic_info td {
   vertical-align: middle;
 }
 .question ul {
-  background: #f6ef9a;
+  background: #F6EF9A;
   padding: 10px;
 }
 .question li {
@@ -1593,7 +1593,7 @@ table.basic_info td {
 .question .hint {
   font-size: 20px;
   margin: 5px 5px 10px;
-  color: #999999;
+  color: #999;
   font-weight: bold;
 }
 #skip_logic {
@@ -1651,7 +1651,7 @@ table.basic_info td {
   background-color: #e6fae6;
 }
 .question_list_element {
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid #CCC;
   background: white;
 }
 .question_list_element td {
@@ -1714,7 +1714,7 @@ body.server h4 {
 }
 .student_dialog {
   padding: 20px;
-  background-color: #cccccc;
+  background-color: #CCC;
 }
 input {
   border: 1px solid #888;
@@ -1733,12 +1733,12 @@ textarea {
   width: 95%;
 }
 button[disabled] {
-  color: #cccccc !important;
+  color: #CCC !important;
   background: white !important;
-  border: 3px solid #cccccc !important;
+  border: 3px solid #CCC !important;
 }
 .grey {
-  color: #999999;
+  color: #999;
 }
 img.loading {
   padding: 8px 20px;
@@ -1756,7 +1756,7 @@ button.navigation {
   display: inline-block;
   font-size: 22px;
   color: white;
-  background-color: #f49b00;
+  background-color: #F49B00;
   border: 0 !important;
   margin: 10px 0 5px 0;
   padding: 7px 20px !important;
@@ -1766,10 +1766,10 @@ button.navigation {
   font-weight: normal;
 }
 button.navigation:active {
-  background-color: #f6c637;
+  background-color: #F6C637;
 }
 button.navigation:hover {
-  background-color: #f26f10;
+  background-color: #F26F10;
 }
 body.server button {
   font-size: 1em;
@@ -1779,7 +1779,7 @@ body.server button {
   display: inline-block;
   font-size: 20px;
   color: black;
-  background-color: #cccccc;
+  background-color: #CCC;
   border: 0 !important;
   margin: 10px 10px 5px 0px;
   padding: 7px 25px !important;
@@ -1799,22 +1799,22 @@ body.server button {
 }
 .command:active,
 .navigation:active {
-  background-color: #f6c637;
+  background-color: #F6C637;
 }
 .command:hover,
 .navigation:hover {
-  background-color: #f6ef9a;
+  background-color: #F6EF9A;
 }
 .command.selected {
   color: white;
-  background-color: #8cc63f;
+  background-color: #8CC63F;
 }
 .command_red {
   text-decoration: none;
   display: inline-block;
   font-size: 20px;
   color: black;
-  background-color: #cccccc;
+  background-color: #CCC;
   border: 0 !important;
   margin: 10px 10px 5px 0px;
   padding: 7px 25px !important;
@@ -1832,17 +1832,17 @@ body.server button {
   color: black;
 }
 .command_red:active {
-  background-color: #f6c637;
+  background-color: #F6C637;
 }
 .command_red:hover {
-  background-color: #f6ef9a;
+  background-color: #F6EF9A;
 }
 .xtick {
   text-decoration: none;
   display: inline-block;
   font-size: 15px;
   color: black;
-  background-color: #cccccc;
+  background-color: #CCC;
   border: 0 !important;
   margin: 5px;
   padding: 7px !important;
@@ -1858,14 +1858,14 @@ body.server button {
   color: black;
 }
 .xtick:active {
-  background-color: #f6c637;
+  background-color: #F6C637;
 }
 .xtick:hover {
-  background-color: #f6ef9a;
+  background-color: #F6EF9A;
 }
 .xtick.selected {
   color: white;
-  background-color: #8cc63f;
+  background-color: #8CC63F;
 }
 label {
   color: black;
@@ -1930,7 +1930,7 @@ label.no_help {
   width: 99%;
   font-size: 25px;
   color: white;
-  background-color: #f49b00;
+  background-color: #F49B00;
   border: 0 !important;
   margin: 20px 0 0;
   padding: 7px !important;
@@ -1946,7 +1946,7 @@ label.no_help {
   }
 }
 .LoginView button:active {
-  background-color: #f6c637;
+  background-color: #F6C637;
 }
 @media only screen and (max-width: 450px) {
   .LoginView #login_logo {
@@ -2009,7 +2009,7 @@ label.no_help {
 .messages {
   font-weight: bold;
   font-size: 16px;
-  color: #888888;
+  color: #888;
   display: block;
   clear: both;
   margin: 10px 0;
@@ -2035,9 +2035,9 @@ label.no_help {
 }
 .class_table td {
   padding: 0.25em 0;
-  color: #666666;
+  color: #666;
   border: 0;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid #CCC;
 }
 .class_table th {
   vertical-align: top;
@@ -2060,9 +2060,9 @@ label.no_help {
 }
 .conflict_table td {
   padding: 0.25em 0;
-  color: #666666;
+  color: #666;
   border: 0;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid #CCC;
 }
 .conflict_table th {
   vertical-align: top;
@@ -2088,9 +2088,9 @@ label.no_help {
 }
 .MasteryCheckView table td {
   padding: 0.25em 0;
-  color: #666666;
+  color: #666;
   border: 0;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid #CCC;
 }
 .MasteryCheckView table th {
   vertical-align: top;
@@ -2110,9 +2110,9 @@ label.no_help {
 }
 .LogView table td {
   padding: 0.25em 0;
-  color: #666666;
+  color: #666;
   border: 0;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid #CCC;
 }
 .LogView table th {
   vertical-align: top;
@@ -2135,14 +2135,14 @@ label.no_help {
 }
 ul.klass_list li {
   padding: 5px 0;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid #CCC;
 }
 .student_list_element {
   padding: 5px 0;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid #CCC;
 }
 .subtest_taken {
-  background: #8cc63f;
+  background: #8CC63F;
 }
 #current_part {
   width: 50px;
@@ -2168,9 +2168,9 @@ body[rtl] {
 }
 .ProgressView table.tabular td {
   padding: 0.25em 0;
-  color: #666666;
+  color: #666;
   border: 0;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid #CCC;
 }
 .ProgressView table.tabular th {
   vertical-align: top;
@@ -2229,9 +2229,9 @@ body[rtl] {
 }
 .KlassSubtestResultView td {
   padding: 0.25em 0;
-  color: #666666;
+  color: #666;
   border: 0;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid #CCC;
 }
 .KlassSubtestResultView th {
   vertical-align: top;
@@ -2261,9 +2261,9 @@ body[rtl] {
 }
 .CurriculumView table td {
   padding: 0.25em 0;
-  color: #666666;
+  color: #666;
   border: 0;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid #CCC;
 }
 .CurriculumView table th {
   vertical-align: top;
@@ -2277,7 +2277,7 @@ body[rtl] {
 }
 .CurriculumView table td,
 .CurriculumView table th {
-  border-left: 1px solid #cccccc;
+  border-left: 1px solid #CCC;
   padding: 0 0.25em;
 }
 .CurriculumView table th {
@@ -2300,12 +2300,11 @@ body[rtl] {
 /*
  * ButtonView
  */
-.ButtonView button {
+.ButtonView .button {
   min-width: 1.2em;
-  background: #cccccc;
-  color: #999999;
+  background: #CCC;
+  color: #999;
   display: inline-block;
-  border: none;
   border-radius: 0;
   margin: 0 !important;
   padding: 7px 10px 5px;
@@ -2314,11 +2313,11 @@ body[rtl] {
   font-weight: bold;
   font-size: 1.1em;
 }
-.ButtonView button:hover {
-  color: #666666;
+.ButtonView .button:hover {
+  color: #666;
 }
 .ButtonView .selected {
-  background: #f6c637 !important;
+  background: #F6C637 !important;
   color: white !important;
 }
 .ButtonView .left {
@@ -2466,7 +2465,7 @@ table.tablesorter thead tr .headerSortUp {
   color: #383838;
 }
 .ui-widget-header {
-  border: 1px solid #cccccc;
+  border: 1px solid #CCC;
   background: #817865;
   color: #ffffff;
   font-weight: bold;
@@ -2479,40 +2478,40 @@ table.tablesorter thead tr .headerSortUp {
 .ui-state-default,
 .ui-widget-content .ui-state-default,
 .ui-widget-header .ui-state-default {
-  background: #cccccc;
-  color: #999999;
+  background: #CCC;
+  color: #999;
 }
 .ui-state-default a,
 .ui-state-default a:link,
 .ui-state-default a:visited {
-  color: #f6ef9a;
+  color: #F6EF9A;
   text-decoration: none;
 }
 .ui-state-hover,
 .ui-widget-content .ui-state-hover,
 .ui-widget-header .ui-state-hover {
-  color: #666666;
+  color: #666;
 }
 .ui-state-focus,
 .ui-widget-content .ui-state-focus,
 .ui-widget-header .ui-state-focus {
-  color: #666666;
+  color: #666;
 }
 .ui-state-hover a,
 .ui-state-hover a:hover {
-  color: #f6ef9a;
+  color: #F6EF9A;
   text-decoration: none;
 }
 .ui-state-active,
 .ui-widget-content .ui-state-active,
 .ui-widget-header .ui-state-active {
-  background: #f6c637;
+  background: #F6C637;
   color: white;
 }
 .ui-state-active a,
 .ui-state-active a:link,
 .ui-state-active a:visited {
-  color: #f49b00;
+  color: #F49B00;
   text-decoration: none;
 }
 .ui-widget :active {
@@ -2809,18 +2808,18 @@ button.ui-button::-moz-focus-inner {
   height: 0.5em;
   text-align: left;
   overflow: hidden;
-  background-color: #cccccc;
+  background-color: #CCC;
 }
 .ui-progressbar .ui-progressbar-value {
   margin: -1px;
   height: 100%;
-  background-color: #f6c637;
+  background-color: #F6C637;
 }
 /* Auto complete and menu */
 .ui-autocomplete {
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
-  background: #f6ef9a;
+  background: #F6EF9A;
   position: absolute;
   top: 0;
   left: 0;
@@ -2866,7 +2865,7 @@ button.ui-button::-moz-focus-inner {
 .ui-menu .ui-menu-item a.ui-state-focus,
 .ui-menu .ui-menu-item a.ui-state-active {
   color: white;
-  background: #8cc63f;
+  background: #8CC63F;
   font-weight: normal;
 }
 .ui-menu .ui-state-disabled {

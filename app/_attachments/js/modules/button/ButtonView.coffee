@@ -2,86 +2,93 @@ class ButtonView extends Backbone.View
 
   className : "ButtonView"
 
-  events : 
+  events :
     if Modernizr.touch
-      "click .button" : "onClick"
-    else
-      "click .button" : "onClick"
+      "touchstart .button" : "onClick"
+    else 
+      "click .button"      : "onClick"
+
+  getValue: -> @answer
+
+  setValue: (values = []) ->
+
+    values = [values] unless _(values).isArray()
+
+    @answer = _.union(values, @options)
+
+    selector = @answer.map( (value) -> "[data-value='#{value}']" ).join(',')
+
+    @$el.find(".button").removeClass "selected"
+    @$el.find(selector).addClass "selected"
+
 
   onChange: (event) ->
 
     value = _.map($(event.target).find("option:selected"), (x) -> $(x).attr('data-answer'))
     @trigger "change", @el
 
-  onClick: (event) ->
-    event.preventDefault()
+  hybridClick: (opts) -> 
+    @$el.find(".button").removeClass "selected"
 
-    $target = $(event.target)
+    if not opts.checkedBefore
+      opts.$target.addClass "selected"
+      @answer = ""
+    else
+      @answer = opts.value
 
-    value         = $target.attr('data-value')
-    checkedBefore = $target.hasClass("selected")
+  singleClick: (opts) ->
+    @$el.find(".button").removeClass "selected"
+    opts.$target.addClass "selected"
+    @answer = opts.value
 
-    if @mode is "hybrid"
 
-      @$el.find(".button").removeClass "selected"
+  multipleClick: (opts) ->
 
-      if not checkedBefore
-        $target.addClass "selected"
-        @answer = ""
+    if opts.checkedBefore
+      opts.$target.removeClass "selected"
+    else
+      opts.$target.addClass "selected"
+
+    @answer[opts.value] =
+      if opts.checkedBefore
+        "unchecked"
       else
-        @answer = value
+        "checked"
 
-    else if @mode is "single"
 
-      @$el.find(".button").removeClass "selected"
+  onClick : (event) ->
 
-      $target.addClass "selected"
-      @answer = value
+    options =
+      $target       : $(event.target)
+      value         : $(event.target).attr('data-value')
+      checkedBefore : $(event.target).hasClass("selected")
 
-    else if @mode is "multiple"
-
-      if checkedBefore
-        $target.removeClass "selected"
-      else 
-        $target.addClass "selected"
-
-      @answer[value] =
-        if checkedBefore
-          "unchecked"
-        else
-          "checked"
-
+    @["#{@mode}Click"](options)
     @trigger "change", @el
 
-  initialize: ( options ) ->
-    @mode       = options.mode
-    @options    = options.options
-    @dataEntry  = options.dataEntry
-    @fontFamily = options.fontFamily
+  initialize : ( options ) ->
+    @mode    = options.mode
+    @options = options.options
+    
+    if @mode == "single" or @mode == "open"
+      answer = ""
+    else if @mode == "multiple"
+      answer = {}
+      @options.forEach (option) ->
+        answer[option.value] = "unchecked"
 
-    if options.answer?
-      @answer = options.answer
-    else
-      @answer = "" if @mode is "single" or @mode is "open"
-      if @mode is "multiple"
-        @answer = {}
-        for option in @options
-          @answer[option.value] = "unchecked"
+    @answer = answer
 
   render : ->
 
-    fontStyle = "style=\"font-family: #{@fontFamily} !important;\"" if @fontFamily isnt "" 
-
-    data = null
-
     htmlOptions = ""
 
-    for option, i in @options
+    @options.forEach (option, i) ->
 
-      styleClass = 
-        if i is 0
+      styleClass =
+        if i == 0
           "left"
-        else if i is @options.length-1
+        else if i == @options.length-1
           "right"
         else
           ""
@@ -89,37 +96,19 @@ class ButtonView extends Backbone.View
       value = option.value
       label = option.label
 
-      if data != null
-        if @mode is "multiple"
-          answerValue = data[@parent.name][value]
-          selectedClass =
-            if answerValue is "checked"
-              "selected"
-            else
-              ""
-          # Special case for displaying results for "single" mode, since the actual value is not saved.
-        else if @mode is "single"
-          answerValue = data[@parent.name]
-          selectedClass =
-            if answerValue is value
-              "selected"
-            else
-              ""
-      else
-        selectedClass =
-          if @mode is "multiple" and @answer[value] is "checked"
-            "selected"
-          else if @mode is "single" and @answer is value
-            "selected"
-          else
-            ""
+      selectedClass =
+        if @mode == "multiple" && @answer[value] == "checked"
+          "selected"
+        else if @mode == "single" && @answer == value
+          "selected"
+        else
+          ""
 
-
-      htmlOptions += "<button class='button #{styleClass} #{selectedClass}' #{fontStyle||''} data-value='#{value}'>#{label}</button>"
+      htmlOptions += "<div class='button #{styleClass} #{selectedClass}' data-value='#{value}'>#{label}</div>"
+    , @
 
     @$el.html("
       #{htmlOptions}
     ").addClass(@className) # Why do I have to do this?
 
     @trigger "rendered"
-
