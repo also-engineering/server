@@ -125,7 +125,7 @@ class LoginView extends Backbone.View
     nameName = nameName.titleize()
 
     serverHtml = "
-      <img src='images/login_logo.png' id='login_logo'>
+      <img src='images/tangerine_logo_small.png' id='login_logo'>
       <div id='name_message' class='messages'></div>
       <input type='text' id='name' placeholder='#{nameName}'>
       <div id='pass_message' class='messages'></div>
@@ -134,7 +134,7 @@ class LoginView extends Backbone.View
     "
 
     tabletHtml = "
-      <img src='images/login_logo.png' id='login_logo'>
+      <img src='images/tangerine_logo_small.png' id='login_logo'>
 
       <div class='tab_container'>
         <div class='tab mode selected first' data-mode='login'>#{@text.login_tab}</div><div class='tab mode last' data-mode='signup'>#{@text.sign_up_tab}</div>
