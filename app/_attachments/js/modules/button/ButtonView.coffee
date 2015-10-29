@@ -69,6 +69,12 @@ class ButtonView extends Backbone.View
   initialize : ( options ) ->
     @mode    = options.mode
     @options = options.options
+
+    @fontFamily = options.fontFamily
+    @fontStyle = if @fontFamily? and @fontFamily != ""
+        "style=\"font-family: #{@fontFamily} !important;\""
+      else
+        ""
     
     if @mode == "single" or @mode == "open"
       answer = ""
@@ -104,7 +110,7 @@ class ButtonView extends Backbone.View
         else
           ""
 
-      htmlOptions += "<div class='button #{styleClass} #{selectedClass}' data-value='#{value}'>#{label}</div>"
+      htmlOptions += "<div class='button #{styleClass} #{selectedClass}' data-value='#{value}' #{@fontStyle}>#{label}</div>"
     , @
 
     @$el.html("
