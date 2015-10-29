@@ -292,7 +292,9 @@ class SurveyRunView extends Backbone.View
     @$el.empty()
 
     unless @dataEntry
-      previous = @parent.parent.result.getByHash(@model.get('hash'))
+      # class doesn't have this heirarchy
+      if @parent? and @parent.parent? and @parent.parent.result?
+        previous = @parent.parent.result.getByHash(@model.get('hash'))
 
     notAskedCount = 0
     @questions.sort()

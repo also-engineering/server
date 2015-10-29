@@ -292,18 +292,21 @@ class GridRunView extends Backbone.View
 
     unless @dataEntry
 
-      previous = @parent.parent.result.getByHash(@model.get('hash'))
-      if previous
+      # class doesn't have this heirarchy
+      if @parent? and @parent.parent? and @parent.parent.result?
 
-        #     items = data.items
-        @captureLastAttempted     = previous.capture_last_attempted
-        @itemAtTime               = previous.item_at_time
-        @timeIntermediateCaptured = previous.time_intermediate_captured
-        @captureItemAtTime        = previous.capture_item_at_time
-        @autostop                 = previous.auto_stop
-        @lastAttempted            = previous.attempted
-        @timeRemaining            = previous.time_remain
-        @markRecord               = previous.mark_record
+        previous = @parent.parent.result.getByHash(@model.get('hash'))
+        if previous
+
+          #     items = data.items
+          @captureLastAttempted     = previous.capture_last_attempted
+          @itemAtTime               = previous.item_at_time
+          @timeIntermediateCaptured = previous.time_intermediate_captured
+          @captureItemAtTime        = previous.capture_item_at_time
+          @autostop                 = previous.auto_stop
+          @lastAttempted            = previous.attempted
+          @timeRemaining            = previous.time_remain
+          @markRecord               = previous.mark_record
 
     @updateMode @mode if @modeButton?
 
@@ -487,21 +490,24 @@ class GridRunView extends Backbone.View
     @trigger "ready"
 
     unless @dataEntry
+      
+      # class doesn't have this heirarchy
+      if @parent? and @parent.parent? and @parent.parent.result?
 
-      previous = @parent.parent.result.getByHash(@model.get('hash'))
-      if previous
-        @markRecord = previous.mark_record
+        previous = @parent.parent.result.getByHash(@model.get('hash'))
+        if previous
+          @markRecord = previous.mark_record
 
-        for item, i in @markRecord
-          @markElement item, null, 'populate'
+          for item, i in @markRecord
+            @markElement item, null, 'populate'
 
-        @itemAtTime = previous.item_at_time
-        $target = @$el.find(".grid_element[data-index=#{@itemAtTime}]")
-        $target.addClass "element_minute"
+          @itemAtTime = previous.item_at_time
+          $target = @$el.find(".grid_element[data-index=#{@itemAtTime}]")
+          $target.addClass "element_minute"
 
-        @lastAttempted = previous.attempted
-        $target = @$el.find(".grid_element[data-index=#{@lastAttempted}]")
-        $target.addClass "element_last"
+          @lastAttempted = previous.attempted
+          $target = @$el.find(".grid_element[data-index=#{@lastAttempted}]")
+          $target.addClass "element_last"
 
   isValid: ->
     # Stop timer if still running. Issue #240
