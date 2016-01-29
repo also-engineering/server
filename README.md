@@ -26,6 +26,16 @@ Kick it off
 
 ```shell
 ./server-init.sh
+source /etc/profile
+cd editor
+npm start init
+cd ../robbert/
+npm install
+cd ../decompressor/
+npm install
+cd ..
+source /home/$USER/.rvm/scripts/rvm
+rvmsudo -E bash -c "pm2 restart ecosystem.json -u $USER"
 ```
 
 When this finishes you should be able to go to the hostname that you provided during configuration, which should redirect you to the appropriate CouchApp url.
